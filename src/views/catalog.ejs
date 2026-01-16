@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <nav class="nawigacja">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/catalog" class="nav-link">Catalog</a>
+        <% if (typeof isAuthenticated !== 'undefined' && isAuthenticated) { %>
+            <a href="/cart" class="nav-link">Cart</a>
+            <a href="/orders" class="nav-link">Orders</a>
+            <% if (typeof user !== 'undefined' && user && user.role === 'admin') { %>
+                <a href="/manager" class="nav-link" style="color: #ff6b6b;">Admin Panel</a>
+            <% } %>
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="nav-link">Logout</button>
+            </form>
+        <% } else { %>
+            <a href="/login" class="nav-link">Login</a>
+            <a href="/register" class="nav-link">Register</a>
+        <% } %>
+    </nav>
+
+    <div class="container">
+        <form action="/catalog/search" method="get" class="search-form">
+            <input type="text" name="q" placeholder="Search products...">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <h1>Product List</h1>
+
+        <div class="list">
+            <% products.forEach(function(p) { %>
+                
+                <div class="product-card">
+                    <h3><%= p.name %></h3>
+                    <p>Price: <strong><%= p.price %> PLN</strong></p>
+                    <a href="/product/<%= p.ID %>" class="btn">View Details</a>
+                </div>
+
+            <% }); %>
+        </div>
+    </div>
+</body>
+
+</html>

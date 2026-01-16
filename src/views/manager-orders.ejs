@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <nav class="nawigacja">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/manager" class="nav-link">Products</a>
+        <a href="/manager/orders" class="nav-link">Orders</a>
+        <a href="/manager/users" class="nav-link">Users</a>
+        <form action="/logout" method="POST" style="display: inline;">
+            <button type="submit" class="nav-link">Logout</button>
+        </form>
+    </nav>
+
+    <div class="container">
+        <h2>
+            <%= title %>
+        </h2>
+
+        <% if (orders.length===0) { %>
+            <p>There are no orders.</p>
+            <% } else { %>
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User ID</th>
+                            <th>Date</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% orders.forEach(order=> { %>
+                            <tr>
+                                <td>
+                                    <%= order.ID %>
+                                </td>
+                                <td>
+                                    <%= order.userID %>
+                                </td>
+                                <td>
+                                    <%= order.createdAt.toDateString() %>
+                                </td>
+                                <td>
+                                    <%= order.totalAmount %> PLN
+                                </td>
+                                <td>
+                                    <%= order.status %>
+                                </td>
+                                <td>
+                                    <% if (order.status==='open' ) { %>
+                                        <form action="/manager/orders/finalize/<%= order.ID %>" method="POST"
+                                            style="display: inline;">
+                                            <button type="submit" class="btn btn-primary">Finalize</button>
+                                        </form>
+                                        <% } %>
+                                            <form action="/manager/orders/cancel/<%= order.ID %>" method="POST"
+                                                style="display: inline;">
+                                                <button type="submit" class="btn btn-danger">Cancel</button>
+                                            </form>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+                <% } %>
+    </div>
+</body>
+
+</html>

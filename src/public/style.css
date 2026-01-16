@@ -1,0 +1,345 @@
+/* body {
+    font-family: Arial, sans-serif;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0px;
+    background-color: rgb(255, 248, 239);
+}
+
+.main-link {
+    border: 1px solid #ccc;
+    padding: 50px;
+    width: 50%;
+    display: block;
+    margin: auto;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    background-color: rgb(16, 65, 24);
+    font-weight: bold;
+}
+
+.main-link:hover {
+    background-color: rgb(14, 46, 23);
+}
+
+.link {
+    text-decoration: none;
+    color: #fefffd;
+    font-size: 24px;
+}
+.index-body {
+    margin-top: 200px;
+}
+
+.nawigacja {
+    display: flex;
+    justify-content: center;
+    padding: 0px 0;
+    background-color: rgb(71, 82, 22);
+    margin-bottom: 20px;
+    justify-content: space-around;
+}
+
+.nav-link {
+    color: antiquewhite;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+    text-align: center;
+    padding:40px 100px;
+    height: 100%;
+    width: 100%;
+}
+
+.nav-link:hover {
+    background-color: rgb(54, 61, 24);
+}
+
+.product-card{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 30px; 
+    margin: 20px auto; 
+    max-width: 600px; 
+}
+a {
+    text-decoration: none;
+    color: rgb(66, 80, 35);
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: rgb(15, 46, 20);
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: rgb(14, 65, 27);
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: rgba(228, 0, 0, 0.842);
+    border-color: rgba(228, 0, 0, 0.842);
+}
+
+.delete-btn:hover {
+    background-color: red;
+    border-color: red;
+    cursor: pointer;
+} */
+
+/* --- 1. IMPORT CZCIONKI I RESET --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box; /* Kluczowe dla inputów i paddingów */
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Nowoczesna czcionka */
+    background-color: #f4f6f9; /* Jasne, szare tło - czytelne */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* --- 2. NAWIGACJA (.nawigacja) --- */
+.nawigacja {
+    background-color: #2c3e50; /* Ciemny granat */
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Linki w nawigacji */
+.nav-link {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 20px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    
+    /* Reset dla przycisku wylogowania, żeby wyglądał jak link */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    display: inline-block;
+}
+
+.nav-link:hover {
+    background-color: #34495e; /* Jaśniejszy granat po najechaniu */
+    color: #fff;
+}
+
+/* --- 3. KONTENERY I UKŁAD --- */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+h1 { text-align: center; margin-top: 40px; }
+
+/* --- 4. PRODUKTY I KARTY (.list, .product-card) --- */
+
+/* Kontener listy produktów (Catalog) */
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsywna siatka */
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Pojedyncza karta produktu */
+.product-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Delikatny cień */
+    border: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Jeśli .product-card jest używany pojedynczo (np. w details), usuwamy flexowe rozciąganie */
+.container > .product-card {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Uniesienie przy najechaniu */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.product-card h3, .product-card h1 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* --- 5. TABELE (.users-table, .orders-table, .cart-table) --- */
+table, .users-table, .orders-table, .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden; /* Zaokrąglone rogi tabeli */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+thead tr {
+    background-color: #3498db; /* Niebieski nagłówek */
+    color: #ffffff;
+    text-align: left;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9; /* Podświetlenie wiersza */
+}
+
+/* Linki wewnątrz tabel */
+td a {
+    color: #3498db;
+    font-weight: 500;
+    text-decoration: none;
+}
+td a:hover { text-decoration: underline; }
+
+/* Stopka tabeli (np. suma w koszyku) */
+tfoot td {
+    background-color: #f8f9fa;
+    font-size: 1.1em;
+    border-top: 2px solid #ddd;
+}
+
+/* --- 6. PRZYCISKI (.btn) --- */
+.btn, button[type="submit"] {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #3498db; /* Domyślny niebieski */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.1s;
+    text-align: center;
+    font-family: inherit;
+}
+
+.btn:hover, button[type="submit"]:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+/* Warianty kolorystyczne przycisków */
+.btn-primary { background-color: #3498db; }
+.btn-success, .btn[style*="green"] { background-color: #27ae60 !important; } /* Zielony */
+.btn-danger, .delete-btn { background-color: #e74c3c !important; } /* Czerwony */
+.btn-secondary { background-color: #95a5a6 !important; } /* Szary */
+
+/* Poprawka dla małych przycisków w tabelach */
+td .btn, td button {
+    padding: 6px 12px;
+    font-size: 13px;
+    margin: 2px;
+}
+
+/* --- 7. FORMULARZE (Login, Register, Edit) --- */
+form {
+    /* Style dla formularzy, które nie mają klasy, ale są w kontenerze */
+    border-radius: 8px;
+    /* Nadpisujemy inline style z HTML dla lepszego wyglądu, zachowując logikę */
+}
+
+label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #fafafa;
+    transition: border-color 0.3s;
+    box-sizing: border-box; /* Ważne, żeby padding nie rozpychał inputa */
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Formularz wyszukiwania (Catalog) */
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.search-form input {
+    width: 300px; /* Szersze pole wyszukiwania */
+    margin-bottom: 0; /* Reset */
+}
+
+/* --- 8. INNE DROBNE ELEMENTY --- */
+.alert, p[style*="color: red"] {
+    background-color: #fadbd8;
+    color: #c0392b !important;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ebcccc;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+}

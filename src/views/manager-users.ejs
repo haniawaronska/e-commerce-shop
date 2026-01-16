@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <nav class="nawigacja">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/manager" class="nav-link">Products</a>
+        <a href="/manager/orders" class="nav-link">Orders</a>
+        <a href="/manager/users" class="nav-link">Users</a>
+        <form action="/logout" method="POST" style="display: inline;">
+            <button type="submit" class="nav-link">Logout</button>
+        </form>
+    </nav>
+
+    <div class="container">
+
+        <h2>
+            <%= title %>
+        </h2>
+
+        <% if (users.length===0) { %>
+            <p>There are no users.</p>
+            <% } else { %>
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user=> { %>
+                            <tr>
+                                <td>
+                                    <%= user.ID %>
+                                </td>
+                                <td>
+                                    <%= user.email %>
+                                </td>
+                                <td>
+                                    <%= user.role %>
+                                        <form action="/manager/users/role/<%= user.ID %>" method="POST"
+                                            style="display: inline;">
+                                            <input type="hidden" name="newRole"
+                                                value="<%= user.role === 'user' ? 'admin' : 'user' %>">
+                                            <button type="submit" class="btn btn-primary">
+                                                <% if (user.role==='user' ) { %>
+                                                    Change to Admin
+                                                    <% } else { %>
+                                                        Change to User
+                                                        <% } %>
+                                            </button>
+                                        </form>
+                                </td>
+                                <td>
+                                    <form action="/manager/users/<%= user.ID %>/delete" method="POST"
+                                        style="display: inline;">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+                <% } %>
+    </div>
+</body>
+
+</html>

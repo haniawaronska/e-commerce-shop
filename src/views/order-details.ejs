@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="nawigacja">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/catalog" class="nav-link">Catalog</a>
+        <% if (isAuthenticated) { %>
+            <a href="/cart" class="nav-link">Cart</a>
+            <a href="/orders" class="nav-link">Orders</a>
+            <% if (user.role === 'admin') { %>
+                <a href="/manager" class="nav-link" style="color: #ff6b6b;">Admin Panel</a>
+            <% } %>
+            <span class="nav-link">Welcome, <%= user.username %>!</span>
+            <form action="/logout" method="POST" style="display:inline;">
+                <button type="submit" class="nav-link" style="background:none; border:none; color:antiquewhite; cursor:pointer; font: inherit;">Logout</button>
+            </form>
+        <% } else { %>
+            <a href="/login" class="nav-link">Login</a>
+            <a href="/register" class="nav-link">Register</a>
+        <% } %>
+    </nav>
+
+    <div class="container">
+        <div class="product-card" style="margin: 0 auto;">
+            <h1><%= product.name %></h1>
+            <p>ID: <%= product.id %></p>
+            <p>Status: <strong><%= product.status %></strong></p>
+            <h2 style="color: green;">Price: <%= product.price %> PLN</h2>
+            
+            <div style="margin: 20px 0; padding: 20px; background: #f9f9f9;">
+                <p><%= product.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' %></p>
+            </div>
+
+            <% if (isAuthenticated) { %>
+                <form action="/cart/add/<%= product.id %>" method="POST">
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            <% } else { %>
+                <p style="color: #666;">Please login to add products to cart</p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

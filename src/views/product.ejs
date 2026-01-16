@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <nav class="nawigacja">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/catalog" class="nav-link">Catalog</a>
+        <% if (typeof isAuthenticated !=='undefined' && isAuthenticated) { %>
+            <a href="/cart" class="nav-link">Cart</a>
+            <a href="/orders" class="nav-link">Orders</a>
+            <% if (typeof user !=='undefined' && user && user.role==='admin' ) { %>
+                <a href="/manager" class="nav-link" style="color: #ff6b6b;">Admin Panel</a>
+                <% } %>
+                    <form action="/logout" method="POST" style="display: inline;">
+                        <button type="submit" class="nav-link">Logout</button>
+                    </form>
+                    <% } else { %>
+                        <a href="/login" class="nav-link">Login</a>
+                        <a href="/register" class="nav-link">Register</a>
+                        <% } %>
+    </nav>
+
+    <div class="container">
+
+
+        <div class="product-card">
+
+            <h1>
+                <%= product.name %>
+            </h1>
+
+            <p>ID: <%= product.ID %>
+            </p>
+            <p>Status: <strong>
+                    <%= product.status %>
+                </strong></p>
+
+            <h2 style="color: green;">Price: <%= product.price %> PLN</h2>
+            <hr>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos natus aut commodi officia alias rem
+                esse quae qui, exercitationem tenetur deserunt ut error odio, praesentium maiores cum molestias
+                reprehenderit corporis.</p>
+            <br>
+            <form action="/cart/add/<%= product.ID %>" method="POST">
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>

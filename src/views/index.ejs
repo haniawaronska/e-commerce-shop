@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <nav class="nawigacja">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/catalog" class="nav-link">Catalog</a>
+        <% if (typeof isAuthenticated !=='undefined' && isAuthenticated) { %>
+            <a href="/cart" class="nav-link">Cart</a>
+            <a href="/orders" class="nav-link">Orders</a>
+            <% if (typeof user !=='undefined' && user && user.role==='admin' ) { %>
+                <a href="/manager" class="nav-link" style="color: #ff6b6b;">Admin Panel</a>
+                <% } %>
+                    <form action="/logout" method="POST" style="display: inline;">
+                        <button type="submit" class="nav-link">Logout</button>
+                    </form>
+                    <% } else { %>
+                        <a href="/login" class="nav-link">Login</a>
+                        <a href="/register" class="nav-link">Register</a>
+                        <% } %>
+    </nav>
+
+    <div class="container" style="text-align: center; margin-top: 50px;">
+        <h1>Welcome to E-Commerce Store</h1>
+        <p style="margin: 20px 0;">Browse our products and start shopping!</p>
+
+        <div style="margin-top: 30px;">
+            <a href="/catalog" class="btn" style="font-size: 18px; padding: 15px 30px; margin: 10px;">Browse Catalog</a>
+            <% if (typeof isAuthenticated !=='undefined' && isAuthenticated) { %>
+                <a href="/cart" class="btn" style="font-size: 18px; padding: 15px 30px; margin: 10px;">View Cart</a>
+                <% if (typeof user !=='undefined' && user && user.role==='admin' ) { %>
+                    <a href="/manager" class="btn"
+                        style="font-size: 18px; padding: 15px 30px; margin: 10px; background-color: #ff6b6b;">Admin
+                        Panel</a>
+                    <% } %>
+                        <% } else { %>
+                            <a href="/login" class="btn"
+                                style="font-size: 18px; padding: 15px 30px; margin: 10px;">Login</a>
+                            <a href="/register" class="btn"
+                                style="font-size: 18px; padding: 15px 30px; margin: 10px;">Register</a>
+                            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

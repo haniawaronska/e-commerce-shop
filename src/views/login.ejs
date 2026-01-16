@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="nawigacja">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/catalog" class="nav-link">Catalog</a>
+        <a href="/login" class="nav-link">Login</a>
+        <a href="/register" class="nav-link">Register</a>
+    </nav>
+
+    <div class="container">
+        <h1 style="text-align: center;">Login</h1>
+        
+        <% if (typeof error !== 'undefined' && error) { %>
+            <p style="color: red; text-align: center;"><%= error %></p>
+        <% } %>
+
+        <form action="/login" method="POST" style="max-width: 500px; margin: 0 auto; background: white; padding: 20px; border: 1px solid #ccc;">
+            <div style="margin-bottom: 15px;">
+                <label for="username" style="display: block; margin-bottom: 5px;">Username</label>
+                <input type="text" id="username" name="username" required style="width: 100%; padding: 8px;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label for="password" style="display: block; margin-bottom: 5px;">Password</label>
+                <input type="password" id="password" name="password" required style="width: 100%; padding: 8px;">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 15px;">
+            <a href="/register">Don't have an account? Register</a>
+        </p>
+    </div>
+</body>
+</html>
