@@ -2,7 +2,7 @@
 
 Aplikacja e-commerce z pełnym systemem zarządzania, zbudowana w TypeScript z Express.js i MongoDB.
 
-## 🚀 Technologie
+## Technologie
 
 - **Backend:** Node.js, Express.js, TypeScript
 - **Baza danych:** MongoDB + Mongoose
@@ -10,13 +10,13 @@ Aplikacja e-commerce z pełnym systemem zarządzania, zbudowana w TypeScript z E
 - **Session Management:** express-session
 - **Architektura:** Clean Architecture (Domain, Application, Infrastructure, UI)
 
-## 📋 Wymagania
+## Wymagania
 
 - Node.js (v14+)
 - MongoDB Atlas account lub lokalna instancja MongoDB
 - npm lub yarn
 
-## 🔧 Instalacja
+## Instalacja
 
 1. Sklonuj repozytorium:
 ```bash
@@ -47,7 +47,7 @@ npm run dev
 npm start
 ```
 
-## 📁 Struktura projektu
+## Struktura projektu
 
 ```
 src/
@@ -58,18 +58,18 @@ src/
 └── views/           # Szablony EJS
 ```
 
-## 👤 System ról
+## System ról
 
 - **Anonimowy:** przeglądanie katalogu
 - **Użytkownik:** koszyk, zamówienia
 - **Administrator:** panel zarządzania produktami, zamówieniami, użytkownikami
 
-## 🔒 Bezpieczeństwo
+## Bezpieczeństwo
 
 - Sesje z timeoutem 24h
 - Middleware autoryzacji dla chronionych endpointów
 - Role-based access control
 
-## 📝 Licencja
+## Licencja
 
 ISC
