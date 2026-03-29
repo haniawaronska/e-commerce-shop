@@ -6,6 +6,7 @@ import { MongoCartRepository } from "../Infrastructure/Mongo/MongoCartRepository
 import { MongoUserRepository } from "../Infrastructure/Mongo/MongoUserRepository";
 import { MongoOrderRepository } from '../Infrastructure/Mongo/MongoOrderRepository';
 import path from 'path';
+import fs from 'fs';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import { requireAdmin, requireAuth, attachUser } from './middleware/auth';
@@ -43,14 +44,30 @@ const orderService = new OrderService(orderRepo, cartRepo);
     }
 })();
 
-// const expressLayouts = require('express-ejs-layouts');
+
 const app = express();
 const PORT = 3003;
-// app.use(expressLayouts);
-// app.set('layout', 'layout');
+
+const viewsPathCandidates = [
+    path.join(__dirname, '../views'),
+    path.join(__dirname, '../../src/views')
+];
+
+const publicPathCandidates = [
+    path.join(__dirname, '../public'),
+    path.join(__dirname, '../../src/public')
+];
+
+const viewsPath = viewsPathCandidates.find(candidate => fs.existsSync(candidate));
+const publicPath = publicPathCandidates.find(candidate => fs.existsSync(candidate));
+
+if (!viewsPath || !publicPath) {
+    throw new Error('Nie znaleziono folderu views/public. Sprawdź strukturę katalogów projektu.');
+}
+
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '../views'));
-app.use(express.static(path.join(__dirname, '../public')));
+app.set('views', viewsPath);
+app.use(express.static(publicPath));
 
 app.use(express.urlencoded({ extended: true }));
 

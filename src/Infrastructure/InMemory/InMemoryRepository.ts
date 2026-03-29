@@ -7,19 +7,19 @@ interface HasID {
 export class InMemoryRepository<T extends HasID> implements IRepository<T> {
     private db: Map<string, T> = new Map<string, T>();
 
-    public getById(id: string): T | null {
+    public async getById(id: string): Promise<T | null> {
         return this.db.get(id) || null;
     }
 
-    public save(entity: T): void {
+    public async save(entity: T): Promise<void> {
         this.db.set(entity.ID, entity);
     }
 
-    public delete(id: string): void {
+    public async delete(id: string): Promise<void> {
         this.db.delete(id);
     }
 
-    public getAll(): T[] {
+    public async getAll(): Promise<T[]> {
         return Array.from(this.db.values());
     }
 }
